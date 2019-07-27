@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2> Additions Level 2</h2>
+
+    <h3 id = "question"></h3>
+
+    <script>
+        var num1 = Math.random() * 11;
+        num1 = parseInt(num1);
+        var num2 = Math.random() * 11;
+        num2 = parseInt(num2);
+        document.getElementById("question").innerHTML = num1 + " + " + num2;
+        var sum = num1 + num2;
+        var flag = false;
+    </script>
+
+    <input type="text" id = "userAnswer" > <br>
+
+    <button onclick="verify()" id="check" >Check Answer</button>
+
+    <h4 id="prompt"></h4>
+
+    <script>
+        function verify(){
+            var ans = document.getElementById("userAnswer").value;
+            ans = parseInt(ans);
+            if(ans === sum){
+                document.getElementById("prompt").innerHTML= "Correct!!! <br>"+ num1 + " + " + num2 + " = " + ans;               
+            }else{
+                document.getElementById("prompt").innerHTML= "Wrong!!! Try Again <br>"+ num1 + " + " + num2 + " = " + sum;
+            }
+            console.log(flag);
+            if(flag === false){
+                flag = true;
+                console.log(flag);
+                //console.log("About to call create button");
+                createButton("next", 'Go to next problem',"level2.html");
+                //console.log("Called create button");
+                createButton("addn","back to level selection","../additions.html");
+                createButton("home","back to home", "../../home.html");
+            }
+            
+        }
+
+        function createButton(btnid, btnname, link){
+            
+            //if(document.getElementById(btnid) )
+            var btn = document.createElement("button");
+            btn.innerHTML = btnname;
+            btn.id = btnid;
+            btn.addEventListener("click", function(){
+                window.location.href = link;
+            });
+            
+            var body = document.getElementsByTagName("body")[0];
+            body.appendChild(btn);
+            body.appendChild(document.createElement("br"));
+            //btn.onclick = "location.href='level1.html'";
+            console.log(btn.id);
+            
+            
+        }
+    </script>
+
+    <script>
+        var enterHandling = document.getElementById("userAnswer");
+        
+        enterHandling.addEventListener("keyup", function(event){
+            console.log("Enter Handling " + event.keyCode);
+            if(event.keyCode == 13){
+                console.log("asdf");
+                event.preventDefault();
+                //document.getElementById("check").click;
+                verify();
+            }
+        });
+    </script>
+
+</body>
+</html>
